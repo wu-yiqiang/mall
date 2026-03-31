@@ -6,6 +6,8 @@ package svc
 import (
 	"api/internal/config"
 	"mall/service/user/model"
+
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
 )
 
 type ServiceContext struct {
@@ -14,7 +16,9 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
+	sqlxConn := sqlx.NewMysql(c.Mysql.DataSource)
 	return &ServiceContext{
-		Config: c,
+		Config:    c,
+		UserModel: model.NewUserModel(sqlxConn),
 	}
 }
