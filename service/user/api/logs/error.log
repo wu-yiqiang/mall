@@ -1,0 +1,4 @@
+{"@timestamp":"2026-04-01T12:52:27.523+08:00","caller":"sqlx/utils.go:147","content":"stmt: select `id`,`user_id`,`username`,`password`,`email`,`gender`,`create_time`,`update_time` from `user` where `username` = '999' limit 1, error: Error 1146 (42S02): Table 'go-zero.user' doesn't exist","level":"error","span":"4e89d463ca45c039","trace":"6d1eb5ed14d93256d9071f82b69ac98d"}
+{"@timestamp":"2026-04-01T12:52:27.523+08:00","caller":"logic/signupLogic.go:38","content":"Error 1146 (42S02): Table 'go-zero.user' doesn't exist","level":"error"}
+{"@timestamp":"2026-04-01T15:42:23.023+08:00","caller":"logic/loginLogic.go:43","content":"sql: no rows in result set","level":"error"}
+{"@timestamp":"2026-04-01T15:59:19.417+08:00","caller":"logic/userDetailsLogic.go:32","content":"sql: no rows in result set","level":"error"}

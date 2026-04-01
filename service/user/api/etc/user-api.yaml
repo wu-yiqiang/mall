@@ -1,6 +1,18 @@
 Name: user-api
 Host: 0.0.0.0
 Port: 8888
+Log:
+  ServiceName: "user-srv"
+  Mode: file
+  Encoding: json
+  Path: logs
+  Level: info
+  Stat: true
+
+
 
 Mysql:
-  DataSource: root:root@root@tcp(127.0.0.1:3306)/go-zero
+  DataSource: root:root@root@tcp(127.0.0.1:3306)/go-zero?parseTime=True
+
+CacheRedis:
+  - Host: 127.0.0.1:6379
