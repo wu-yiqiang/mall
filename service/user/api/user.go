@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"mall/service/user/api/internal/middleware"
 
 	"mall/service/user/api/internal/config"
 	"mall/service/user/api/internal/handler"
@@ -22,7 +23,7 @@ func main() {
 
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()
-
+	server.Use(middleware.CopyResp)
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
 

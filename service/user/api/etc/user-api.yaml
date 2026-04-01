@@ -9,7 +9,9 @@ Log:
   Level: info
   Stat: true
 
-
+Auth:
+  AccessSecret: sssadsad@122334#sfdfasD23D345
+  AccessExpire: 40900
 
 Mysql:
   DataSource: root:root@root@tcp(127.0.0.1:3306)/go-zero?parseTime=True
