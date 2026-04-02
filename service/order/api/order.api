@@ -1,0 +1,28 @@
+syntax = "v1"
+
+info (
+	title:   "mall"
+	desc:    "订单服务"
+	author:  "Sutter"
+	email:   "sutter.wu@outlook.com"
+	version: "1.0"
+)
+
+type searchRequest {
+	OrderId int64 `json:"orderId"`
+}
+
+type searchResponse {
+	OrderId  int64 `json:"orderId"`
+	Status   int `json:"status"`
+	Username string `json:"username"`
+}
+
+@server (
+	prefix: api
+)
+service order-api {
+	@handler SearchHandle
+	post /order/search (searchRequest) returns (searchResponse)
+}
+

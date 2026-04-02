@@ -6,7 +6,6 @@ package logic
 import (
 	"context"
 	"errors"
-	"fmt"
 	"mall/service/user/api/internal/svc"
 	"mall/service/user/api/internal/types"
 
@@ -33,6 +32,5 @@ func (l *UserDetailsLogic) UserDetails(req *types.UserDetailsRequest) (resp *typ
 		logx.Errorw(error.Error())
 		return &types.UserDetailsResponse{}, errors.New("用户详情查询失败")
 	}
-	fmt.Println(u)
 	return &types.UserDetailsResponse{UserId: u.UserId, UserName: u.Username, Gender: int(u.Gender), Email: u.Email.String}, nil
 }

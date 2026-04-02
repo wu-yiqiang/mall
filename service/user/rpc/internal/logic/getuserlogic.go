@@ -2,6 +2,7 @@ package logic
 
 import (
 	"context"
+	"errors"
 
 	"mall/service/user/rpc/internal/svc"
 	"mall/service/user/rpc/types/user"
@@ -24,7 +25,10 @@ func NewGetUserLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetUserLo
 }
 
 func (l *GetUserLogic) GetUser(in *user.GetUserReq) (*user.GetUserRes, error) {
-	// todo: add your logic here and delete this line
-
-	return &user.GetUserRes{}, nil
+	u, error := l.svcCtx.UserModel.FindOneByUserId(l.ctx, int64(in.UserId))
+	if error != nil {
+		logx.Errorw(error.Error())
+		return &user.GetUserRes{}, errors.New("用户详情查询失败")
+	}
+	return &user.GetUserRes{UserId: u.UserId, UserName: u.Username}, nil
 }
