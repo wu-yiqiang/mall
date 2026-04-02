@@ -5,6 +5,7 @@ package logic
 
 import (
 	"context"
+	"mall/service/order/api/internal/errorx"
 	"mall/service/order/api/internal/svc"
 	"mall/service/order/api/internal/types"
 	"mall/service/user/rpc/userclient"
@@ -51,7 +52,8 @@ func (l *SearchHandleLogic) SearchHandle(req *types.SearchRequest) (resp *types.
 	//}
 	userResp, err := l.svcCtx.UserRPC.GetUser(l.ctx, &userclient.GetUserReq{UserId: 1775036814})
 	if err != nil {
-		return nil, err
+		return nil, errorx.NewCodeError(errorx.QueryError, "查询错误")
+
 	}
 	return &types.SearchResponse{OrderId: 1, Status: 200, Username: userResp.GetUserName()}, nil
 }
