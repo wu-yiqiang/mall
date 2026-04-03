@@ -1,0 +1,37 @@
+syntax = "v1"
+
+info (
+	title:   "mall"
+	desc:    "短链服务"
+	author:  "Sutter"
+	email:   "sutter.wu@outlook.com"
+	version: "1.0"
+)
+
+type ConvertRequest {
+	LongUrl string `json:"longUrl" validate:"required"`
+}
+
+type ConvertResponse {
+	ShortUrl string `json:"shortUrl"`
+}
+
+type ShortRequest {
+	ShortUrl string `json:"shortUrl" validate:"required"`
+}
+
+type ShortResponse {
+	LongUrl string `json:"longUrl"`
+}
+
+@server (
+	prefix: api
+)
+service shortener-api {
+	@handler ConvertHandler
+	post /shortener/convert (ConvertRequest) returns (ConvertResponse)
+
+	@handler ShortHandler
+	get /shortener/:shortUrl (ShortRequest) returns (ShortResponse)
+}
+

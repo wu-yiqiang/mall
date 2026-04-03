@@ -1,0 +1,9 @@
+Name: shortener-api
+Host: 0.0.0.0
+Port: 8890
+
+ShortUrlDB:
+  DSN: root:root@root@tcp(127.0.0.1:3306)/go-zero?chartset=utf8mb4&parsetime=true
+
+Sequence:
+  DSN: root:root@root@tcp(127.0.0.1:3306)/go-zero?chartset=utf8mb4&parsetime=true
