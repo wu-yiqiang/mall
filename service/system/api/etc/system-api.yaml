@@ -1,0 +1,13 @@
+Name: system-api
+Host: 0.0.0.0
+Port: 8888
+
+Auth:
+  AccessSecret: sssadsad@122334#sfdfasD23D345
+  AccessExpire: 40900
+
+Mysql:
+  DataSource: root:root@root@tcp(127.0.0.1:3306)/go-zero?parseTime=True
+
+CacheRedis:
+  - Host: 127.0.0.1:6379

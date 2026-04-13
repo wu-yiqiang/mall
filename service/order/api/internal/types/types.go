@@ -8,7 +8,7 @@ type SearchRequest struct {
 }
 
 type SearchResponse struct {
-	OrderId  int64 `json:"orderId"`
-	Status   int `json:"status"`
+	OrderId  int64  `json:"orderId"`
+	Status   int    `json:"status"`
 	Username string `json:"username"`
 }

@@ -1,0 +1,53 @@
+syntax = "v1"
+
+info (
+	title:   "mall"
+	desc:    "系统服务"
+	author:  "Sutter"
+	email:   "sutter.wu@outlook.com"
+	version: "1.0"
+)
+
+type loginRequest {
+	UserName string `json:"username"`
+	Password string `json:"password"`
+}
+
+type loginResponse {
+	Message      string `json:"message"`
+	AccessToken  string `json:"accessToken"`
+	AccessExpire int    `json:"accessExpire"`
+	RefreshAfter int    `json:"refreshAfter"`
+}
+
+type registerRequest {
+	UserName string `json:"username"`
+	Password string `json:"password"`
+}
+
+type registerResponse {
+	Message string `json:"message"`
+}
+
+type roleSearchRequest {
+	Keyword string `json:"keyword"`
+}
+
+type roleSearchResponse {
+	Message string `json:"message"`
+}
+
+@server (
+	prefix: api
+)
+service system-api {
+	@handler UserLoginHandle
+	post /system/user/login (loginRequest) returns (loginResponse)
+
+	@handler UserRegisterHandle
+	post /system/user/register (registerRequest) returns (registerResponse)
+
+	@handler RoleHandle
+	post /system/role/search (roleSearchRequest) returns (roleSearchResponse)
+}
+
