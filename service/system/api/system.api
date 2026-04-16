@@ -9,8 +9,8 @@ info (
 )
 
 type loginRequest {
-	UserName string `json:"username"`
-	Password string `json:"password"`
+	UserName string `json:"username, example=Sutter"`
+	Password string `json:"password, example=1234@Abcd"`
 }
 
 type loginResponse {
@@ -39,8 +39,13 @@ type roleSearchResponse {
 
 @server (
 	prefix: api
+	tags:    "用户管理"
+	summary: "用户管理接口"
 )
 service system-api {
+     @doc (
+        description: "用户登录"
+    )
 	@handler UserLoginHandle
 	post /system/user/login (loginRequest) returns (loginResponse)
 

@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
 
 	"mall/service/system/api/internal/config"
 	"mall/service/system/api/internal/handler"
@@ -19,10 +20,10 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
-
-	server := rest.MustNewServer(c.RestConf)
+	server := rest.MustNewServer(c.RestConf,
+		rest.WithCors(),
+		rest.WithFileServer("/swagger/", http.Dir("./docs/swagger")))
 	defer server.Stop()
-
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
 
