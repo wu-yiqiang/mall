@@ -6,11 +6,12 @@ info (
 	author:  "Sutter"
 	email:   "sutter.wu@outlook.com"
 	version: "1.0"
+	schemes: http
 )
 
 type loginRequest {
-	UserName string `json:"username, example=Sutter"`
-	Password string `json:"password, example=1234@Abcd"`
+	UserName string `json:"username,default=Sutter"`
+	Password string `json:"password,default=1234@Abcd"`
 }
 
 type loginResponse {
