@@ -5,7 +5,6 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"errors"
-	"fmt"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"mall/service/system/api/internal/svc"
@@ -91,7 +90,6 @@ on t4.menu_id = t5.menu_id
 where t1.user_id = ?`
 	err = l.svcCtx.DB.QueryRowsCtx(l.ctx, &menus, queryMenuSql, u.UserId)
 	if err != nil {
-		fmt.Println("dsfs萨达萨达", err)
 		menus = make([]types.Menu, 0)
 		return &types.LoginResponse{Message: "登陆失败", AccessToken: "", AccessExpire: 0, RefreshAfter: 0, Roles: make([]types.Role, 0), Menus: make([]types.Menu, 0)}, nil
 	}
