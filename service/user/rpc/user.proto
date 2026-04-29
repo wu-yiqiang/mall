@@ -10,7 +10,7 @@ message getUserReq {
 
 message getUserRes {
   int64  userId = 1;
-  string userName =2;
+  string userName = 2;
   int64  gender = 3;
 }
 

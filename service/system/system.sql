@@ -24,8 +24,32 @@ CREATE TABLE `role` (
 
 CREATE TABLE `user_relation_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `user_id` varchar(32) NOT NULL COMMENT '用户ID',
-  `role_id` varchar(32) NOT NULL COMMENT '角色ID',
+  `user_id` varchar(40) NOT NULL COMMENT '用户ID',
+  `role_id` varchar(40) NOT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`),
   KEY `idx_role_id` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = '用户角色关联表';
+
+
+
+CREATE TABLE `menu` (
+     `menu_id` varchar(40) NOT NULL,
+     `name` varchar(400) NOT NULL,
+     `code` varchar(400) NOT NULL,
+     `path` varchar(400) NOT NULL,
+     `serial` int NOT NULL,
+     `parent_id` varchar(40),
+     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+     `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+     `is_deleted` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
+     PRIMARY KEY (`menu_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT = '菜单表';
+
+
+CREATE TABLE `role_relation_menu` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `role_id` varchar(40) NOT NULL COMMENT '角色ID',
+  `menu_id` varchar(40) NOT NULL COMMENT '用户ID',
+  PRIMARY KEY (`id`),
+  KEY `idx_menu_id` (`menu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = '角色菜单关联表';

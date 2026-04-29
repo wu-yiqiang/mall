@@ -11,3 +11,8 @@ goctl model mysql datasource -url="root:root@root@tcp(127.0.0.1:3306)/go-zero" -
 
 RPC
 goctl rpc protoc user.proto --go_out=./types --go-grpc_out=./types --zrpc_out=.
+
+
+
+swagger
+   goctl api swagger --api ./system.api --dir ./docs/swagger

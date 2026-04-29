@@ -14,11 +14,28 @@ type loginRequest {
 	Password string `json:"password,default=1234@Abcd"`
 }
 
+type Role {
+	RoleId string `json:"roleId"`
+	Name   string `json:"name"`
+	Code   string `json:"code"`
+}
+
+type Menu {
+	MenuId   string `json:"menuId"`
+	Name     string `json:"name"`
+	Code     string `json:"code"`
+	Path     string `json:"path"`
+	Serial   string `json:"serial"`
+	ParentId string `json:"parentId"`
+}
+
 type loginResponse {
 	Message      string `json:"message"`
 	AccessToken  string `json:"accessToken"`
 	AccessExpire int    `json:"accessExpire"`
 	RefreshAfter int    `json:"refreshAfter"`
+	Roles        []Role `json:"roles"`
+	Menus        []Menu `json:"menus"`
 }
 
 type registerRequest {
@@ -39,14 +56,14 @@ type roleSearchResponse {
 }
 
 @server (
-	prefix: api
+	prefix:  api
 	tags:    "用户管理"
 	summary: "用户管理接口"
 )
 service system-api {
-     @doc (
-        description: "用户登录"
-    )
+	@doc (
+		description: "用户登录"
+	)
 	@handler UserLoginHandle
 	post /system/user/login (loginRequest) returns (loginResponse)
 

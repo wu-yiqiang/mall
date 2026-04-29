@@ -119,11 +119,67 @@
                 "accessToken": {
                   "type": "string"
                 },
+                "menus": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "menuId",
+                      "name",
+                      "code",
+                      "path",
+                      "serial",
+                      "parentId"
+                    ],
+                    "properties": {
+                      "code": {
+                        "type": "string"
+                      },
+                      "menuId": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "parentId": {
+                        "type": "string"
+                      },
+                      "path": {
+                        "type": "string"
+                      },
+                      "serial": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
                 "message": {
                   "type": "string"
                 },
                 "refreshAfter": {
                   "type": "integer"
+                },
+                "roles": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "roleId",
+                      "name",
+                      "code"
+                    ],
+                    "properties": {
+                      "code": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "roleId": {
+                        "type": "string"
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -185,7 +241,7 @@
       }
     }
   },
-  "x-date": "2026-04-17 15:27:23",
+  "x-date": "2026-04-29 19:41:02",
   "x-description": "This is a goctl generated swagger file.",
   "x-github": "https://github.com/zeromicro/go-zero",
   "x-go-zero-doc": "https://go-zero.dev/",

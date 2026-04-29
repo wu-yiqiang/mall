@@ -5,6 +5,7 @@ import (
 	"crypto/md5"
 	"encoding/hex"
 	"errors"
+	"fmt"
 	"github.com/golang-jwt/jwt/v4"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"mall/service/system/api/internal/svc"
@@ -67,5 +68,32 @@ func (l *UserLoginHandleLogic) UserLoginHandle(req *types.LoginRequest) (resp *t
 		logx.Errorw(error.Error())
 		return nil, errors.New("登陆失败")
 	}
-	return &types.LoginResponse{Message: "登陆成功", AccessToken: token, AccessExpire: int(nowUnix + expire), RefreshAfter: int(nowUnix + expire/2)}, nil
+	var roles []types.Role
+	var menus []types.Menu
+	queryRoleSql := `SELECT r.role_id, r.name, r.code 
+        FROM role r
+        JOIN user_relation_role ur ON r.role_id = ur.role_id
+        WHERE ur.user_id = ?`
+	err = l.svcCtx.DB.QueryRowsCtx(l.ctx, &roles, queryRoleSql, u.UserId)
+	if err != nil {
+		roles = make([]types.Role, 0)
+		return &types.LoginResponse{Message: "登陆失败", AccessToken: "", AccessExpire: 0, RefreshAfter: 0, Roles: roles, Menus: menus}, nil
+	}
+	queryMenuSql := `select DISTINCT IFNULL(t5.menu_id, "") as parent_id, IFNULL(t5.name, ""), IFNULL(t5.code, ""),IFNULL(t5.path, ""),IFNULL(t5.serial, ""),IFNULL(t5.parent_id, "") as parent_id
+	from user_relation_role t1 
+join user_relation_role t2 
+	on t1.role_id = t2.role_id
+join role_relation_menu t4 
+on
+ t1.role_id = t4.role_id
+join menu t5
+on t4.menu_id = t5.menu_id
+where t1.user_id = ?`
+	err = l.svcCtx.DB.QueryRowsCtx(l.ctx, &menus, queryMenuSql, u.UserId)
+	if err != nil {
+		fmt.Println("dsfs萨达萨达", err)
+		menus = make([]types.Menu, 0)
+		return &types.LoginResponse{Message: "登陆失败", AccessToken: "", AccessExpire: 0, RefreshAfter: 0, Roles: make([]types.Role, 0), Menus: make([]types.Menu, 0)}, nil
+	}
+	return &types.LoginResponse{Message: "登陆成功", AccessToken: token, AccessExpire: int(nowUnix + expire), RefreshAfter: int(nowUnix + expire/2), Roles: roles, Menus: menus}, nil
 }
