@@ -69,6 +69,7 @@ func (l *UserLoginHandleLogic) UserLoginHandle(req *types.LoginRequest) (resp *t
 	}
 	var roles []types.Role
 	var menus []types.Menu
+	var buttons []types.Button
 	queryRoleSql := `SELECT r.role_id, r.name, r.code 
         FROM role r
         JOIN user_relation_role ur ON r.role_id = ur.role_id
@@ -76,7 +77,7 @@ func (l *UserLoginHandleLogic) UserLoginHandle(req *types.LoginRequest) (resp *t
 	err = l.svcCtx.DB.QueryRowsCtx(l.ctx, &roles, queryRoleSql, u.UserId)
 	if err != nil {
 		roles = make([]types.Role, 0)
-		return &types.LoginResponse{Message: "登陆失败", AccessToken: "", AccessExpire: 0, RefreshAfter: 0, Roles: roles, Menus: menus}, nil
+		return &types.LoginResponse{Message: "登陆失败", AccessToken: "", AccessExpire: 0, RefreshAfter: 0, Roles: nil, Menus: nil, Buttons: nil}, nil
 	}
 	queryMenuSql := `select DISTINCT IFNULL(t5.menu_id, "") as parent_id, IFNULL(t5.name, ""), IFNULL(t5.code, ""),IFNULL(t5.path, ""),IFNULL(t5.serial, ""),IFNULL(t5.parent_id, "") as parent_id
 	from user_relation_role t1 
@@ -91,7 +92,27 @@ where t1.user_id = ?`
 	err = l.svcCtx.DB.QueryRowsCtx(l.ctx, &menus, queryMenuSql, u.UserId)
 	if err != nil {
 		menus = make([]types.Menu, 0)
-		return &types.LoginResponse{Message: "登陆失败", AccessToken: "", AccessExpire: 0, RefreshAfter: 0, Roles: make([]types.Role, 0), Menus: make([]types.Menu, 0)}, nil
+		return &types.LoginResponse{Message: "登陆失败", AccessToken: "", AccessExpire: 0, RefreshAfter: 0, Roles: nil, Menus: nil, Buttons: nil}, nil
 	}
-	return &types.LoginResponse{Message: "登陆成功", AccessToken: token, AccessExpire: int(nowUnix + expire), RefreshAfter: int(nowUnix + expire/2), Roles: roles, Menus: menus}, nil
+	queryButtonSql := `select DISTINCT IFNULL(t7.button_id, "") as button_id, IFNULL(t7.name, "") as name, IFNULL(t7.code, "") as code
+	from user_relation_role t1 
+join user_relation_role t2 
+	on t1.role_id = t2.role_id
+join role_relation_menu t4 
+on
+ t1.role_id = t4.role_id
+join menu t5
+on t4.menu_id = t5.menu_id
+join menu_relation_button t6
+on t6.menu_id  = t5.menu_id
+join button t7
+on t6.button_id = t7.button_id
+where t1.user_id = ?
+;`
+	err = l.svcCtx.DB.QueryRowsCtx(l.ctx, &buttons, queryButtonSql, u.UserId)
+	if err != nil {
+		buttons = make([]types.Button, 0)
+		return &types.LoginResponse{Message: "登陆失败", AccessToken: "", AccessExpire: 0, RefreshAfter: 0, Roles: nil, Menus: nil, Buttons: nil}, nil
+	}
+	return &types.LoginResponse{Message: "登陆成功", AccessToken: token, AccessExpire: int(nowUnix + expire), RefreshAfter: int(nowUnix + expire/2), Roles: roles, Menus: menus, Buttons: buttons}, nil
 }

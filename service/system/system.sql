@@ -19,7 +19,7 @@ CREATE TABLE `role` (
      `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
      `is_deleted` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
      PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT = '角色表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = '角色表';
 
 
 CREATE TABLE `user_relation_role` (
@@ -43,7 +43,7 @@ CREATE TABLE `menu` (
      `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
      `is_deleted` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
      PRIMARY KEY (`menu_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COMMENT = '菜单表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = '菜单表';
 
 
 CREATE TABLE `role_relation_menu` (
@@ -53,3 +53,21 @@ CREATE TABLE `role_relation_menu` (
   PRIMARY KEY (`id`),
   KEY `idx_menu_id` (`menu_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = '角色菜单关联表';
+
+CREATE TABLE `button` (
+     `button_id` varchar(40) NOT NULL,
+     `name` varchar(400) NOT NULL,
+     `code` varchar(400) NOT NULL,
+     `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+     `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+     `is_deleted` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
+     PRIMARY KEY (`button_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = '按钮表';
+
+CREATE TABLE `menu_relation_button` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `menu_id` varchar(40) NOT NULL COMMENT '菜单ID',
+  `button_id` varchar(40) NOT NULL COMMENT '按钮ID',
+  PRIMARY KEY (`id`),
+  KEY `idx_button_id` (`button_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT = '菜单按钮关联表';

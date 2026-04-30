@@ -3,6 +3,12 @@
 
 package types
 
+type Button struct {
+	ButtonId string `json:"buttonId"`
+	Name     string `json:"name"`
+	Code     string `json:"code"`
+}
+
 type Menu struct {
 	MenuId   string `json:"menuId"`
 	Name     string `json:"name"`
@@ -24,12 +30,13 @@ type LoginRequest struct {
 }
 
 type LoginResponse struct {
-	Message      string `json:"message"`
-	AccessToken  string `json:"accessToken"`
-	AccessExpire int    `json:"accessExpire"`
-	RefreshAfter int    `json:"refreshAfter"`
-	Roles        []Role `json:"roles"`
-	Menus        []Menu `json:"menus"`
+	Message      string   `json:"message"`
+	AccessToken  string   `json:"accessToken"`
+	AccessExpire int      `json:"accessExpire"`
+	RefreshAfter int      `json:"refreshAfter"`
+	Roles        []Role   `json:"roles"`
+	Menus        []Menu   `json:"menus"`
+	Buttons      []Button `json:"buttons"`
 }
 
 type RegisterRequest struct {

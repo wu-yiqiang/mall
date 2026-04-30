@@ -29,13 +29,20 @@ type Menu {
 	ParentId string `json:"parentId"`
 }
 
+type Button {
+	ButtonId string `json:"buttonId"`
+	Name     string `json:"name"`
+	Code     string `json:"code"`
+}
+
 type loginResponse {
-	Message      string `json:"message"`
-	AccessToken  string `json:"accessToken"`
-	AccessExpire int    `json:"accessExpire"`
-	RefreshAfter int    `json:"refreshAfter"`
-	Roles        []Role `json:"roles"`
-	Menus        []Menu `json:"menus"`
+	Message      string   `json:"message"`
+	AccessToken  string   `json:"accessToken"`
+	AccessExpire int      `json:"accessExpire"`
+	RefreshAfter int      `json:"refreshAfter"`
+	Roles        []Role   `json:"roles"`
+	Menus        []Menu   `json:"menus"`
+	Buttons      []Button `json:"buttons"`
 }
 
 type registerRequest {
