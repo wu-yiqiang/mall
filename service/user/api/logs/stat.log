@@ -489,3 +489,5 @@
 {"@timestamp":"2026-04-11T10:37:27.152+08:00","caller":"stat/usage.go:82","content":"CPU: 0m, MEMORY: Alloc=0.3Mi, TotalAlloc=0.3Mi, Sys=8.0Mi, NumGC=0","level":"stat"}
 {"@timestamp":"2026-04-11T10:37:27.155+08:00","caller":"load/sheddingstat.go:61","content":"(api) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0","level":"stat"}
 {"@timestamp":"2026-04-11T10:38:00.957+08:00","caller":"stat/metrics.go:210","content":"(user-api) - qps: 0.0/s, drops: 0, avg time: 0.0ms, med: 0.0ms, 90th: 0.0ms, 99th: 0.0ms, 99.9th: 0.0ms","level":"stat"}
+{"@timestamp":"2026-04-30T23:36:31.533+08:00","caller":"stat/usage.go:82","content":"CPU: 0m, MEMORY: Alloc=0.3Mi, TotalAlloc=0.3Mi, Sys=12.0Mi, NumGC=0","level":"stat"}
+{"@timestamp":"2026-04-30T23:36:31.535+08:00","caller":"load/sheddingstat.go:61","content":"(api) shedding_stat [1m], cpu: 0, total: 0, pass: 0, drop: 0","level":"stat"}

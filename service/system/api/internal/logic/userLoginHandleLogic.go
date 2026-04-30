@@ -114,5 +114,13 @@ where t1.user_id = ?
 		buttons = make([]types.Button, 0)
 		return &types.LoginResponse{Message: "登陆失败", AccessToken: "", AccessExpire: 0, RefreshAfter: 0, Roles: nil, Menus: nil, Buttons: nil}, nil
 	}
-	return &types.LoginResponse{Message: "登陆成功", AccessToken: token, AccessExpire: int(nowUnix + expire), RefreshAfter: int(nowUnix + expire/2), Roles: roles, Menus: menus, Buttons: buttons}, nil
+	user, err := l.svcCtx.UserModel.FindOne(l.ctx, u.UserId)
+	if err != nil {
+		return nil, errors.New("用户登陆失败")
+	}
+	return &types.LoginResponse{Message: "登陆成功", AccessToken: token, AccessExpire: int(nowUnix + expire), RefreshAfter: int(nowUnix + expire/2), Roles: roles, Menus: menus, Buttons: buttons, UserDetails: types.UserDetails{
+		UserID:   user.UserId,
+		UserName: user.Username,
+		Gender:   user.Gender,
+	}}, nil
 }

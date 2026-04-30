@@ -36,13 +36,21 @@ type Button {
 }
 
 type loginResponse {
-	Message      string   `json:"message"`
-	AccessToken  string   `json:"accessToken"`
-	AccessExpire int      `json:"accessExpire"`
-	RefreshAfter int      `json:"refreshAfter"`
-	Roles        []Role   `json:"roles"`
-	Menus        []Menu   `json:"menus"`
-	Buttons      []Button `json:"buttons"`
+	Message      string      `json:"message"`
+	AccessToken  string      `json:"accessToken"`
+	AccessExpire int         `json:"accessExpire"`
+	RefreshAfter int         `json:"refreshAfter"`
+	Roles        []Role      `json:"roles"`
+	Menus        []Menu      `json:"menus"`
+	Buttons      []Button    `json:"buttons"`
+	UserDetails  UserDetails `json:"userDetails"`
+}
+
+type UserDetails {
+	UserID   string `json:"userId"`
+	UserName string `json:"username"`
+	Email    string `json:"email"`
+	Gender   int64  `json:"gender"`
 }
 
 type registerRequest {
@@ -62,6 +70,19 @@ type roleSearchResponse {
 	Message string `json:"message"`
 }
 
+type (
+	userDetailsRequest {
+		UserId string `json:"user_id"`
+	}
+)
+
+type (
+	userDetailsResponse {
+		Message string      `json:"message"`
+		Data    interface{} `json:"data"`
+	}
+)
+
 @server (
 	prefix:  api
 	tags:    "用户管理"
@@ -74,6 +95,15 @@ service system-api {
 	@handler UserLoginHandle
 	post /system/user/login (loginRequest) returns (loginResponse)
 
+	@doc (
+		description: "用户详情"
+	)
+	@handler UserDetailsHandle
+	post /system/user/details (userDetailsRequest) returns (userDetailsResponse)
+
+	@doc (
+		description: "用户注册"
+	)
 	@handler UserRegisterHandle
 	post /system/user/register (registerRequest) returns (registerResponse)
 

@@ -64,6 +64,56 @@
         }
       }
     },
+    "/api/system/user/details": {
+      "post": {
+        "description": "用户详情",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "UserDetailsHandle",
+        "operationId": "userDetailsHandle",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "user_id"
+              ],
+              "properties": {
+                "user_id": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/system/user/login": {
       "post": {
         "description": "用户登录",
@@ -211,6 +261,7 @@
     },
     "/api/system/user/register": {
       "post": {
+        "description": "用户注册",
         "consumes": [
           "application/json"
         ],
@@ -263,7 +314,7 @@
       }
     }
   },
-  "x-date": "2026-04-29 23:53:28",
+  "x-date": "2026-04-30 22:54:35",
   "x-description": "This is a goctl generated swagger file.",
   "x-github": "https://github.com/zeromicro/go-zero",
   "x-go-zero-doc": "https://go-zero.dev/",

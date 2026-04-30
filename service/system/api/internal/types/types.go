@@ -24,19 +24,27 @@ type Role struct {
 	Code   string `json:"code"`
 }
 
+type UserDetails struct {
+	UserID   string `json:"userId"`
+	UserName string `json:"username"`
+	Email    string `json:"email"`
+	Gender   int64  `json:"gender"`
+}
+
 type LoginRequest struct {
 	UserName string `json:"username,default=Sutter"`
 	Password string `json:"password,default=1234@Abcd"`
 }
 
 type LoginResponse struct {
-	Message      string   `json:"message"`
-	AccessToken  string   `json:"accessToken"`
-	AccessExpire int      `json:"accessExpire"`
-	RefreshAfter int      `json:"refreshAfter"`
-	Roles        []Role   `json:"roles"`
-	Menus        []Menu   `json:"menus"`
-	Buttons      []Button `json:"buttons"`
+	Message      string      `json:"message"`
+	AccessToken  string      `json:"accessToken"`
+	AccessExpire int         `json:"accessExpire"`
+	RefreshAfter int         `json:"refreshAfter"`
+	Roles        []Role      `json:"roles"`
+	Menus        []Menu      `json:"menus"`
+	Buttons      []Button    `json:"buttons"`
+	UserDetails  UserDetails `json:"userDetails"`
 }
 
 type RegisterRequest struct {
@@ -54,4 +62,13 @@ type RoleSearchRequest struct {
 
 type RoleSearchResponse struct {
 	Message string `json:"message"`
+}
+
+type UserDetailsRequest struct {
+	UserId string `json:"user_id"`
+}
+
+type UserDetailsResponse struct {
+	Message string      `json:"message"`
+	Data    interface{} `json:"data"`
 }
