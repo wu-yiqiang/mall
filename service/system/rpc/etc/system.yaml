@@ -1,0 +1,17 @@
+Name: system.rpc
+ListenOn: 0.0.0.0:8080
+Mode: dev
+Etcd:
+  Hosts:
+    - 127.0.0.1:2379
+  Key: system.rpc
+
+Mysql:
+  DataSource: root:root@root@tcp(127.0.0.1:3306)/go-zero?parseTime=True
+
+CacheRedis:
+  - Host: 127.0.0.1:6379
+
+#Consul:
+#  Host: 127.0.0.1:8500
+#  Key: consul-user.rpc

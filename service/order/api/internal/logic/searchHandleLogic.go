@@ -50,7 +50,7 @@ func (l *SearchHandleLogic) SearchHandle(req *types.SearchRequest) (resp *types.
 	//	logx.Errorw(error.Error())
 	//	return nil, errors.New("登陆失败")
 	//}
-	userResp, err := l.svcCtx.UserRPC.GetUser(l.ctx, &userclient.GetUserReq{UserId: 1775036814})
+	userResp, err := l.svcCtx.UserRPC. (l.ctx, &userclient.GetUserReq{UserId: 1775036814})
 	if err != nil {
 		return nil, errorx.NewCodeError(errorx.QueryError, "查询错误")
 

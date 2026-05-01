@@ -95,7 +95,7 @@ where t1.user_id = ?`
 		return &types.LoginResponse{Message: "登陆失败", AccessToken: "", AccessExpire: 0, RefreshAfter: 0, Roles: nil, Menus: nil, Buttons: nil}, nil
 	}
 	queryButtonSql := `select DISTINCT IFNULL(t7.button_id, "") as button_id, IFNULL(t7.name, "") as name, IFNULL(t7.code, "") as code
-	from user_relation_role t1 
+	from user_relation_role t1  
 join user_relation_role t2 
 	on t1.role_id = t2.role_id
 join role_relation_menu t4 
