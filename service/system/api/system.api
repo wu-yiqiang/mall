@@ -74,12 +74,24 @@ type (
 	userDetailsRequest {
 		UserId string `json:"user_id"`
 	}
+	userDetailsUpdateRequest {
+		UserID   string `json:"userId"`
+		UserName string `json:"username"`
+		Email    string `json:"email"`
+		Gender   int64  `json:"gender"`
+	}
 )
 
 type (
 	userDetailsResponse {
 		Message string      `json:"message"`
 		Data    interface{} `json:"data"`
+	}
+	userDetailsUpdateResponse {
+		UserID   string `json:"userId"`
+		UserName string `json:"username"`
+		Email    string `json:"email"`
+		Gender   int64  `json:"gender"`
 	}
 )
 
@@ -107,7 +119,13 @@ service system-api {
 	@handler UserRegisterHandle
 	post /system/user/register (registerRequest) returns (registerResponse)
 
-	@handler RoleHandle
+	@doc (
+		description: "用户更新"
+	)
+	@handler UserUpdate
+	post /system/user/update (userDetailsUpdateRequest) returns (userDetailsUpdateResponse)
+
+	@handler RoleSearch
 	post /system/role/search (roleSearchRequest) returns (roleSearchResponse)
 }
 

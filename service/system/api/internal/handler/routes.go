@@ -17,7 +17,7 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 			{
 				Method:  http.MethodPost,
 				Path:    "/system/role/search",
-				Handler: RoleHandleHandler(serverCtx),
+				Handler: RoleSearchHandler(serverCtx),
 			},
 			{
 				Method:  http.MethodPost,
@@ -33,6 +33,11 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodPost,
 				Path:    "/system/user/register",
 				Handler: UserRegisterHandleHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/system/user/update",
+				Handler: UserUpdateHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/api"),

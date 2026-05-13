@@ -29,8 +29,8 @@
         "tags": [
           "用户管理"
         ],
-        "summary": "RoleHandle",
-        "operationId": "roleHandle",
+        "summary": "RoleSearch",
+        "operationId": "roleSearch",
         "parameters": [
           {
             "name": "body",
@@ -336,9 +336,80 @@
           }
         }
       }
+    },
+    "/api/system/user/update": {
+      "post": {
+        "description": "用户更新",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "schemes": [
+          "https"
+        ],
+        "tags": [
+          "用户管理"
+        ],
+        "summary": "UserUpdate",
+        "operationId": "userUpdate",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "userId",
+                "username",
+                "email",
+                "gender"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "gender": {
+                  "type": "integer"
+                },
+                "userId": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "gender": {
+                  "type": "integer"
+                },
+                "userId": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
-  "x-date": "2026-04-30 23:55:59",
+  "x-date": "2026-05-13 17:40:38",
   "x-description": "This is a goctl generated swagger file.",
   "x-github": "https://github.com/zeromicro/go-zero",
   "x-go-zero-doc": "https://go-zero.dev/",

@@ -72,3 +72,17 @@ type UserDetailsResponse struct {
 	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
 }
+
+type UserDetailsUpdateRequest struct {
+	UserID   string `json:"userId"`
+	UserName string `json:"username"`
+	Email    string `json:"email"`
+	Gender   int64  `json:"gender"`
+}
+
+type UserDetailsUpdateResponse struct {
+	UserID   string `json:"userId"`
+	UserName string `json:"username"`
+	Email    string `json:"email"`
+	Gender   int64  `json:"gender"`
+}

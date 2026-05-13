@@ -2,7 +2,7 @@ CREATE TABLE `user` (
                         `user_id` varchar(40) NOT NULL,
                         `username` varchar(64) NOT NULL DEFAULT "",
                         `password` varchar(64) NOT NULL DEFAULT "",
-                        `email` varchar(64) DEFAULT "",
+                        `email` varchar(64) NOT NULL DEFAULT "",
                         `gender` tinyint(4) NOT NULL DEFAULT '0',
                         `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
                         `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
